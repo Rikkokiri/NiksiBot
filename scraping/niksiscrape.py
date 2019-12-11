@@ -19,7 +19,7 @@ while True:
 		print('Empty page')
 		continue
 
-	if(response_data['html'] == '\n' or page > 30):
+	if(response_data['html'] == '\n'):
 		print('Last page!')
 		break
 
@@ -47,7 +47,7 @@ while True:
 		niksiList.append(niksi)
 
 	parseCount = len(niksiList)
-	percentage = round(parseCount / (4072 * 11), 4)
+	percentage = round(parseCount / (4072 * 11) * 100, 2) 
 	print('Page {}: {} niksis parsed, (approximately {} %% of all data)'.format(page-1, parseCount, percentage))
 
 # Write the retrieved data to a JSON file
