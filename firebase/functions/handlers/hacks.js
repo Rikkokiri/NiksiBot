@@ -1,6 +1,7 @@
 'use strict'
 
 const dbtools = require('../db/dbtools')
+const search = require('./search')
 
 /**
  * Retrieve a random hack
@@ -17,6 +18,28 @@ async function getRandom (agent) {
   })
 }
 
+/**
+ * Free word search
+ */
+async function searchByWord (agent) {
+  if (agent.parameters.any) {
+    let query = agent.parameters.any
+    agent.add(`Searching by ${query}`)
+
+    return search.wordSearch(query).then(results => {
+      // console.log(results)
+      agent.add(`Found some hacks.`)
+    }).catch(err => {
+      console.log(err)
+      agent.add(`An error occurred while searching.`)
+    })
+  } else {
+    agent.add(`Couldn't separate the search term from our input`)
+    return null
+  }
+}
+
 module.exports = {
-  getRandom
+  getRandom,
+  searchByWord
 }

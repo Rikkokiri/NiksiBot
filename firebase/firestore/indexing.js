@@ -1,7 +1,6 @@
 const algoliasearch = require('algoliasearch')
 const dotenv = require('dotenv')
 const firebase = require('firebase')
-const firestore = require('firebase/firestore')
 
 dotenv.config()
 
