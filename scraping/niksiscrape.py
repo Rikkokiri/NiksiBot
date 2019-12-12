@@ -19,7 +19,7 @@ while True:
 		print('Empty page')
 		continue
 
-	if(response_data['html'] == '\n'):
+	if(response_data['html'] == '\n' or page >= 501):
 		print('Last page!')
 		break
 
