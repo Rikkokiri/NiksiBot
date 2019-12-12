@@ -1,6 +1,6 @@
 'use strict'
 
-const data = require('../../scraping/niksidata-1-199.json')
+const data = require('../../scraping/niksidata.json')
 
 var admin = require('firebase-admin')
 var serviceAccount = require('./serviceAccount.json')
@@ -13,14 +13,22 @@ admin.initializeApp({
 // As an admin, the app has access to read and write all data, regardless of Security Rules
 var db = admin.firestore()
 
+function sleep (millis) {
+  return new Promise(resolve => setTimeout(resolve, millis));
+}
+
 data.forEach(function (obj) {
-  db.collection('hacks').add({
-    title: obj.title,
-    category: obj.category,
-    text: obj.text
-  }).then(function (docRef) {
-    console.log('Document written with ID: ', docRef.id)
-  }).catch(function (error) {
-    console.error('Error adding document: ', error)
+  return sleep(500).then(() => {
+    return db.collection('hacks').add({
+      title: obj.title,
+      category: obj.category,
+      text: obj.text,
+      hilarity: obj.hilarity,
+      usefulness: obj.usefulness
+    }).then(function (docRef) {
+      console.log('Document written with ID: ', docRef.id)
+    }).catch(function (error) {
+      console.error('Error adding document: ', error)
+    })
   })
 })

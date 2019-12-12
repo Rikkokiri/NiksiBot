@@ -27,8 +27,11 @@ async function searchByWord (agent) {
     agent.add(`Searching by ${query}`)
 
     return search.wordSearch(query).then(results => {
-      // console.log(results)
-      agent.add(`Found some hacks.`)
+      agent.add(`Found ${results.length} matches, here's one:`)
+
+      let hack = results[0]
+      agent.add(`*_${hack.title}:_*`)
+      agent.add(`_${hack.text}_`)
     }).catch(err => {
       console.log(err)
       agent.add(`An error occurred while searching.`)
@@ -39,7 +42,19 @@ async function searchByWord (agent) {
   }
 }
 
+/**
+ * Count by word
+ */
+async function hackCount (agent) {
+
+}
+
+/**
+* Find best and worst rated niksit (hilarity and usefulness)
+*/
+
 module.exports = {
   getRandom,
-  searchByWord
+  searchByWord,
+  hackCount
 }

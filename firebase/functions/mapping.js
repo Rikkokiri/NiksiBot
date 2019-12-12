@@ -14,6 +14,7 @@ module.exports.mapHandlersToIntents = (agent) => {
   // Query hacks
   intentMap.set('niksi.getRandom', hackHandlers.getRandom)
   intentMap.set('niksi.searchBy', hackHandlers.searchByWord)
+  intentMap.set('niksi.count', hackHandlers.niksiCount)
 
   // Smalltalk
   /*
