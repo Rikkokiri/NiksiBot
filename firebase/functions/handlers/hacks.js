@@ -3,6 +3,12 @@
 const dbtools = require('../db/dbtools')
 const search = require('./search')
 
+function getRandomInt (min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 /**
  * Retrieve a random hack
  */
@@ -27,11 +33,10 @@ async function searchByWord (agent) {
     agent.add(`Searching by ${query}`)
 
     return search.wordSearch(query).then(results => {
-      agent.add(`Found ${results.length} matches, here's one:`)
-
-      let hack = results[0]
+      // agent.add(`Found ${results.length} matches, here's one:`)
+      let hack = results[getRandomInt(0, results.length - 1)]
       agent.add(`*_${hack.title}:_*`)
-      agent.add(`_${hack.text}_`)
+      agent.add(`_${hack.text.replace('\n', ' ')}_`)
     }).catch(err => {
       console.log(err)
       agent.add(`An error occurred while searching.`)
@@ -46,7 +51,16 @@ async function searchByWord (agent) {
  * Count by word
  */
 async function hackCount (agent) {
+  if (agent.parameters.any) {
+    let query = agent.parameters.any
 
+    return search.wordSearch(query).then(results => {
+      // TODO:
+    })
+  } else {
+    agent.add('Alltogether my database has 5964 lifehacks.')
+    agent.add('But Niksi-Pirkka website has 48895 hacks.')
+  }
 }
 
 /**
