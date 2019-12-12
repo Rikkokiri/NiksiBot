@@ -1,0 +1,20 @@
+{
+  "name": "firestore",
+  "version": "1.0.0",
+  "description": "All tools NiksiBot needs to work with Firestore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firestore"
+  ],
+  "author": "Ossian Rajala",
+  "license": "ISC",
+  "dependencies": {
+    "algoliasearch": "^3.35.1",
+    "dotenv": "^8.2.0",
+    "firebase": "^7.5.2",
+    "firebase-admin": "^8.8.0"
+  }
+}
