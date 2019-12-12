@@ -41,9 +41,15 @@ while True:
 	# Categories
 	categories = [cat.text.strip() for cat in soup.select('div.lifehack-card-category a')]
 
+	# Hilarity rating 
+	hilarityScores = [int(score.text.strip()) for score in soup.select('#lifehack-rating-funny .lifehack-rating-value')]
+
+	# Usefulness rating
+	useScores = [int(score.text.strip()) for score in soup.select('#lifehack-rating-usefull .lifehack-rating-value')]
+
 	# Turn data into 'objects' that can be stored in JSON file
-	for (title, cat, hack) in list(zip(titles, categories, hacks)):
-		niksi = {'title': title, 'category': cat, 'text': hack}
+	for (title, cat, hack, hilarity, usefulness) in list(zip(titles, categories, hacks, hilarityScores, useScores)):
+		niksi = {'title': title, 'category': cat, 'hilarity': hilarity, 'usefulness': usefulness, 'text': hack}
 		niksiList.append(niksi)
 
 	parseCount = len(niksiList)
@@ -53,4 +59,3 @@ while True:
 # Write the retrieved data to a JSON file
 with open('niksidata.json', 'w') as outfile:
 	json.dump(niksiList, outfile, ensure_ascii=False)
-
